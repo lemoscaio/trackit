@@ -1,14 +1,27 @@
-import React from 'react'
-import * as S from '../styles/styles'
+import React from "react";
+import { Link } from "react-router-dom";
+import * as S from "../styles/styles";
 
 function Footer() {
     return (
         <S.Footer>
-            <p>Hábitos</p>
-            <S.TodayButton><p>Hoje</p></S.TodayButton>
-            <p>Histórico</p>
+            <S.FooterAltLink to="/habits">
+                <S.FooterLinkWrapper>
+                    <p>Hábitos</p>
+                </S.FooterLinkWrapper>
+            </S.FooterAltLink>
+            <S.FooterLink to="/today">
+                <S.TodayButton>
+                    <p>Hoje</p>
+                </S.TodayButton>
+            </S.FooterLink>
+            <S.FooterAltLink to="/history">
+                <S.FooterLinkWrapper>
+                    <p>Histórico</p>
+                </S.FooterLinkWrapper>
+            </S.FooterAltLink>
         </S.Footer>
-    )
+    );
 }
 
-export default Footer
+export default Footer;

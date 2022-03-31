@@ -11,17 +11,16 @@ function Habits() {
     const [habits, setHabits] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const GET_HABITS_URL =
-            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        };
-        console.log(token);
+    const GET_HABITS_URL =
+        "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+    const token = localStorage.getItem("token");
+    const config = {
+        headers: {
+            Authorization: "Bearer " + token,
+        },
+    };
 
+    useEffect(() => {
         const promise = axios.get(GET_HABITS_URL, config);
         promise
             .then((response) => {
@@ -38,13 +37,34 @@ function Habits() {
     function checkHabitsList() {
         if (habits.length > 0) {
             return habits.map((habit) => {
-                return <Habit habit={habit} />;
+                return (
+                    <Habit
+                        habit={habit}
+                        removeTask={(habitId) => {
+                            removeTask(habitId);
+                        }}
+                    />
+                );
             });
         } else {
             return <NoHabitMessage />;
         }
     }
     const habitsContent = checkHabitsList();
+
+    function removeTask(habitId) {
+        const DELETE_HABIT_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`;
+        axios.delete(DELETE_HABIT_URL, config);
+        console.log("pssou aqui");
+        const newHabits =habits.filter((habit, index) => {
+            if (habit.id === habitId) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+        setHabits(newHabits);
+    }
 
     return (
         <>

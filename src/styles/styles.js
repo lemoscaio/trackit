@@ -7,6 +7,7 @@ export const Header = styled.header`
     @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Playball&display=swap");
 
     position: fixed;
+    z-index: 1;
     height: 70px;
     width: 100%;
     background-color: #126ba5;
@@ -33,10 +34,39 @@ export const Header = styled.header`
 `;
 
 export const Container = styled.main`
-    padding: 70px 30px;
+    padding: 20px 30px;
     background-color: #e5e5e5;
 
-    height: 100vh;
+    position: fixed;
+    top: 70px;
+    width: 100%;
+    height: calc(100vh - 140px);
+
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #f5f5f5;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 10px;
+        background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.44, rgb(122, 153, 217)),
+            color-stop(0.72, rgb(73, 125, 189)),
+            color-stop(0.86, #126ba5)
+        );
+        /* border: 1px solid black; */
+    }
 `;
 
 export const LoginContainer = styled.main`
@@ -95,6 +125,20 @@ export const StyledLink = styled(Link)`
     color: #52b6ff;
 
     cursor: pointer;
+`;
+
+export const FooterLink = styled(Link)`
+    text-decoration: none;
+    cursor: pointer;
+
+    &:visited {
+        color: inherit;
+    }
+`;
+
+export const FooterAltLink = styled(FooterLink)`
+    width: 100%;
+    height: 100%;
 `;
 
 // SIGN IN PAGE
@@ -190,11 +234,9 @@ export const DayButton = styled.div`
     justify-content: center;
     align-items: center;
 
-    background-color: #cfcfcf;
-    /* WHEN NOT CHECKED */
-    /* background-color: #FFFFFF; */
+    background-color: #ffffff;
 
-    color: white;
+    color: #cfcfcf;
     font-size: 20px;
     vertical-align: middle;
 
@@ -205,6 +247,14 @@ export const DayButton = styled.div`
     margin: 10px 0 0;
 
     border-radius: 5px;
+    border: 1px solid #d5d5d5;
+
+    cursor: pointer;
+`;
+
+export const DayButtonOn = styled(DayButton)`
+    background-color: #cfcfcf;
+    color: white;
 `;
 
 export const CancelButton = styled.button`
@@ -351,6 +401,22 @@ export const Footer = styled.footer`
     color: #52b6ff;
 
     padding: 0 5px;
+`;
+
+export const FooterLinkWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
 `;
 
 export const TodayButton = styled.div`

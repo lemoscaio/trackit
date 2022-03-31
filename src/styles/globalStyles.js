@@ -15,6 +15,7 @@ html {
 button {
   font-family: 'Lexend Deca', sans-serif;
 }
+
 `;
 
 export default GlobalStyle;
