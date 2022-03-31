@@ -1,14 +1,14 @@
 import React from "react";
 
-import * as S from "../../../styles/styles"
+import * as S from "../../../styles/styles";
 
-function TopMessage() {
+function TopMessage({ toggleCreateTaskContainer }) {
     return (
         <S.TopMessage>
             <p>Meus hábitos</p>
-            <button>+</button>
+            <button onClick={() => toggleCreateTaskContainer(true)}>+</button>
         </S.TopMessage>
-    )
+    );
 }
 
 export default TopMessage;

@@ -9,10 +9,9 @@ import * as S from "../../../styles/styles";
 
 function Habits() {
     const [habits, setHabits] = useState([]);
+    const [toggleCreateTask, setToggleCreateTask] = useState(false);
     const navigate = useNavigate();
 
-    const GET_HABITS_URL =
-        "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     const token = localStorage.getItem("token");
     const config = {
         headers: {
@@ -21,6 +20,8 @@ function Habits() {
     };
 
     useEffect(() => {
+        const GET_HABITS_URL =
+            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
         const promise = axios.get(GET_HABITS_URL, config);
         promise
             .then((response) => {
@@ -50,13 +51,43 @@ function Habits() {
             return <NoHabitMessage />;
         }
     }
-    const habitsContent = checkHabitsList();
+
+    function checkCreateHabitContainer() {
+        return toggleCreateTask ? (
+            <CreateHabit
+                toggleCreateTaskContainer={(value) => {
+                    toggleCreateTaskContainer(value);
+                }}
+                saveHabit={(habitData) => {
+                    saveHabit(habitData);
+                }}
+            />
+        ) : (
+            <></>
+        );
+    }
+
+    function saveHabit(habitData) {
+        const CREATE_HABIT_URL =
+            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+        const promise = axios.post(CREATE_HABIT_URL, habitData, config);
+        promise
+            .then((response) => {
+                const { data } = response;
+                console.log(data);
+                habitData.id = data.id;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        setHabits([...habits, habitData]);
+    }
 
     function removeTask(habitId) {
         const DELETE_HABIT_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`;
         axios.delete(DELETE_HABIT_URL, config);
         console.log("pssou aqui");
-        const newHabits =habits.filter((habit, index) => {
+        const newHabits = habits.filter((habit, index) => {
             if (habit.id === habitId) {
                 return false;
             } else {
@@ -66,12 +97,23 @@ function Habits() {
         setHabits(newHabits);
     }
 
+    function toggleCreateTaskContainer(value) {
+        setToggleCreateTask(value);
+    }
+
+    const createHabitContent = checkCreateHabitContainer();
+    const habitsContent = checkHabitsList();
+
     return (
         <>
             <S.Container>
-                <TopMessage />
+                <TopMessage
+                    toggleCreateTaskContainer={(value) => {
+                        toggleCreateTaskContainer(value);
+                    }}
+                />
                 <S.Habits>
-                    {/* <CreateHabit /> */}
+                    {createHabitContent}
                     {habitsContent}
                 </S.Habits>
             </S.Container>

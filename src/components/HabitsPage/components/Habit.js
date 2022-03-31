@@ -5,8 +5,6 @@ import * as S from "../../../styles/styles";
 import trashIcon from "./../../../assets/images/icons/trash-icon.svg";
 
 function Habit({ habit: { id, name, days }, removeTask }) {
-    
-
     const daysOfWeek = ["D", "S", "T", "Q", "Q", "S", "S"];
     const buttonsDaysOfWeek = daysOfWeek.map((day, index) => {
         return days.includes(index) ? (
