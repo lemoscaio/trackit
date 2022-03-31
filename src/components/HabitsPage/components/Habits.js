@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Habit from "./Habit.js";
 import axios from "axios";
-import CreateHabit from "./CreateHabit.js";
-import TopMessage from "./TopMessage.js";
-import NoHabitMessage from "./NoHabitMessage.js";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "../../../styles/styles";
 import CreateHabitContext from "./../../../contexts/CreateHabitContext";
+import CreateHabit from "./CreateHabit.js";
+import Habit from "./Habit.js";
+import NoHabitMessage from "./NoHabitMessage.js";
+import TopMessage from "./TopMessage.js";
 
 function Habits() {
     const [habits, setHabits] = useState([]);

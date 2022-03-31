@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import CreateHabitContext from "./../../../contexts/CreateHabitContext"
+import React, { useContext } from "react";
 import * as S from "../../../styles/styles";
+import CreateHabitContext from "./../../../contexts/CreateHabitContext";
 
 function CreateHabit({ toggleCreateTaskContainer, saveHabit }) {
     const daysOfWeek = ["D", "S", "T", "Q", "Q", "S", "S"];

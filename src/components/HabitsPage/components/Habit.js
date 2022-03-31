@@ -1,8 +1,7 @@
 import React from "react";
-import axios from "axios";
 import * as S from "../../../styles/styles";
-
 import trashIcon from "./../../../assets/images/icons/trash-icon.svg";
+
 
 function Habit({ habit: { id, name, days }, removeTask }) {
     const daysOfWeek = ["D", "S", "T", "Q", "Q", "S", "S"];

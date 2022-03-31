@@ -490,13 +490,24 @@ export const TodayHabit = styled.article`
         border: none;
 
         background-color: #e7e7e7;
-        /* WHEN COMPLETED */
-        /* background-color: #8FC549; */
+
+        cursor: pointer;
 
         ion-icon {
             font-size: 40px;
             color: white;
             --ionicon-stroke-width: 86px;
+
+            cursor: pointer;
         }
+    }
+`;
+
+export const TodayHabitDone = styled(TodayHabit)`
+    button {
+        background-color: #8fc549;
+    }
+    span {
+        color: #8FC549;
     }
 `;

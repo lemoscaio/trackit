@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-import Header from "../Header.js";
+import React from "react";
 import Footer from "../Footer.js";
+import Header from "../Header.js";
 import TodayHabits from "./components/TodayHabits.js";
+
 
 export function TodayPage() {
     return (
