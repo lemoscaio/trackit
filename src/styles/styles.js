@@ -354,11 +354,13 @@ export const TodayTopMessage = styled.div`
 
     p {
         color: #bababa;
-        /* WHEN COMPLETED */
-        /* color: #8FC549 */
         font-size: 17.976px;
         line-height: 22px;
     }
+`;
+
+export const CounterHabitsDone = styled.p`
+        color: #8fc549 !important;
 `;
 
 // HISTORY PAGE
@@ -508,6 +510,6 @@ export const TodayHabitDone = styled(TodayHabit)`
         background-color: #8fc549;
     }
     span {
-        color: #8FC549;
+        color: #8fc549;
     }
 `;

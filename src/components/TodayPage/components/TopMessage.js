@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "../../../styles/styles.js";
 import dayjs from "dayjs";
 
-function TopMessage() {
+function TopMessage({ todayHabits }) {
     function getDayOfWeek() {
         const dayNumber = dayjs().day();
         switch (dayNumber) {
@@ -27,12 +27,28 @@ function TopMessage() {
         return (dayjs().month() + 1).toString().padStart(2, "0");
     }
 
+    function getPercentageDone() {
+        const countHabitsDone = todayHabits.filter(
+            (todayHabit) => todayHabit.done
+        ).length;
+        const countTotalHabits = todayHabits.length;
+
+        return countHabitsDone > 0 ? (
+            <S.CounterHabitsDone>
+                {((countHabitsDone / countTotalHabits) * 100).toFixed(2)} %
+                dos hábitos concluídos
+            </S.CounterHabitsDone>
+        ) : (
+            <p>Nenhum hábito concluído ainda</p>
+        );
+    }
+
     return (
         <S.TodayTopMessage>
             <h2>
                 {getDayOfWeek()}, {dayjs().date()}/{getMonthNumber()}
             </h2>
-            <p>Nenhum hábito concluído ainda</p>
+            {getPercentageDone()}
         </S.TodayTopMessage>
     );
 }

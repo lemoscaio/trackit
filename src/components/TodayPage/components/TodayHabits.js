@@ -86,7 +86,7 @@ function TodayHabits() {
 
     return (
         <S.Container>
-            <TopMessage />
+            <TopMessage todayHabits={todayHabits} />
             <S.TodayHabits>{todayHabitsContent}</S.TodayHabits>
         </S.Container>
     );

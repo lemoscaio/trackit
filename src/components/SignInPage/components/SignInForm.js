@@ -23,7 +23,7 @@ function SignInForm(props) {
                 console.log(response);
                 console.log(data);
                 localStorage.setItem("token", data.token);
-                navigate("../habits");
+                navigate("../today");
             })
             .catch((error) => {
                 console.log(error);
