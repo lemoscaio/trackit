@@ -40,7 +40,7 @@ export const Container = styled.main`
     position: fixed;
     top: 70px;
     width: 100%;
-    height: calc(100vh - 140px);
+    height: calc(100% - 140px);
 
     overflow-y: auto;
 
@@ -410,12 +410,16 @@ export const FooterLinkWrapper = styled.div`
     width: 100%;
     height: 100%;
 
+    cursor: pointer;
+
     p {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 100%;
+
+        cursor: pointer;
     }
 `;
 
@@ -433,11 +437,15 @@ export const TodayButton = styled.div`
 
     transform: translate(0, -25%);
 
+    cursor: pointer;
+
     p {
         color: white;
         font-size: 17.976px;
         line-height: 22px;
         text-align: center;
+
+        cursor: pointer;
     }
 `;
 

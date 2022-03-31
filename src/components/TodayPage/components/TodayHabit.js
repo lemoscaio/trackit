@@ -1,13 +1,15 @@
 import React from "react";
 import * as S from "../../../styles/styles";
 
-function TodayHabit() {
+function TodayHabit({
+    todayHabit: { id, name, done, currentSequence, highestSequence },
+}) {
     return (
         <S.TodayHabit>
             <div>
-                <h3>Ler 1 capítulo de livro</h3>
-                <p>Sequência atual: 3 dias</p>
-                <p>Seu recorde: 5 dias</p>
+                <h3>{name}</h3>
+                <p>Sequência atual: {currentSequence} dias</p>
+                <p>Seu recorde: {highestSequence} dias</p>
             </div>
             <button>
                 <ion-icon name="checkmark-outline"></ion-icon>

@@ -6,10 +6,13 @@ import CreateHabit from "./CreateHabit.js";
 import TopMessage from "./TopMessage.js";
 import NoHabitMessage from "./NoHabitMessage.js";
 import * as S from "../../../styles/styles";
+import CreateHabitContext from "./../../../contexts/CreateHabitContext";
 
 function Habits() {
     const [habits, setHabits] = useState([]);
     const [toggleCreateTask, setToggleCreateTask] = useState(false);
+    const [habitName, setHabitName] = useState("");
+    const [habitDays, setHabitDays] = useState([]);
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
@@ -52,16 +55,24 @@ function Habits() {
         }
     }
 
+    function toggleCreateTaskContainer(value) {
+        setToggleCreateTask(value);
+    }
+
     function checkCreateHabitContainer() {
         return toggleCreateTask ? (
-            <CreateHabit
-                toggleCreateTaskContainer={(value) => {
-                    toggleCreateTaskContainer(value);
-                }}
-                saveHabit={(habitData) => {
-                    saveHabit(habitData);
-                }}
-            />
+            <CreateHabitContext.Provider
+                value={{ habitName, habitDays, setHabitName, setHabitDays }}
+            >
+                <CreateHabit
+                    toggleCreateTaskContainer={(value) => {
+                        toggleCreateTaskContainer(value);
+                    }}
+                    saveHabit={(habitData) => {
+                        saveHabit(habitData);
+                    }}
+                />
+            </CreateHabitContext.Provider>
         ) : (
             <></>
         );
@@ -95,10 +106,6 @@ function Habits() {
             }
         });
         setHabits(newHabits);
-    }
-
-    function toggleCreateTaskContainer(value) {
-        setToggleCreateTask(value);
     }
 
     const createHabitContent = checkCreateHabitContainer();

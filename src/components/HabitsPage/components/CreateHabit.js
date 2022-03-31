@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import CreateHabitContext from "./../../../contexts/CreateHabitContext"
 import * as S from "../../../styles/styles";
 
 function CreateHabit({ toggleCreateTaskContainer, saveHabit }) {
     const daysOfWeek = ["D", "S", "T", "Q", "Q", "S", "S"];
 
-    const [habitName, setHabitName] = useState("");
-    const [habitDays, setHabitDays] = useState([]);
+    const { habitName, setHabitName } = useContext(CreateHabitContext);
+    const { habitDays, setHabitDays } = useContext(CreateHabitContext);
 
     const buttonsDaysOfWeek = daysOfWeek.map((day, dayIndex) => {
-        if (!habitDays.includes(dayIndex + 1)) {
+        if (!habitDays.includes(dayIndex)) {
             return (
                 <S.DayButton
                     onClick={() => {
-                        if (!habitDays.includes(dayIndex + 1)) {
-                            habitDays.push(dayIndex + 1);
+                        if (!habitDays.includes(dayIndex)) {
+                            habitDays.push(dayIndex);
                         } else {
                             habitDays.sort();
                             habitDays.splice(
-                                habitDays.indexOf(dayIndex + 1),
+                                habitDays.indexOf(dayIndex),
                                 1
                             );
                         }
@@ -32,11 +33,11 @@ function CreateHabit({ toggleCreateTaskContainer, saveHabit }) {
         return (
             <S.DayButtonOn
                 onClick={() => {
-                    if (!habitDays.includes(dayIndex + 1)) {
-                        habitDays.push(dayIndex + 1);
+                    if (!habitDays.includes(dayIndex)) {
+                        habitDays.push(dayIndex);
                     } else {
                         habitDays.sort();
-                        habitDays.splice(habitDays.indexOf(dayIndex + 1), 1);
+                        habitDays.splice(habitDays.indexOf(dayIndex), 1);
                     }
                     habitDays.sort();
                     setHabitDays([...habitDays]);
@@ -51,6 +52,7 @@ function CreateHabit({ toggleCreateTaskContainer, saveHabit }) {
         saveHabit({ name: habitName, days: habitDays });
         setHabitName("");
         setHabitDays([]);
+        toggleCreateTaskContainer(false);
     }
 
     return (
