@@ -1,10 +1,22 @@
-import React from "react";
-
+import React, { useContext, useEffect } from "react";
+import {useNavigate} from "react-router-dom"
+import * as S from "../../../../../styles/styles";
+import UserLoggedInContext from "./../../../../../contexts/UserLoggedInContext";
 import HistoryTopMessage from "./HistoryTopMessage.js";
 
-import * as S from "./../../../../../styles/styles";
+
 
 function History() {
+    const { setUserLoggedIn } = useContext(UserLoggedInContext);
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!(localStorage.getItem("userData") && localStorage.getItem("token"))) {
+            setUserLoggedIn(false)
+            navigate("../");
+        }
+    }, []);
+
     return (
         <S.Container>
             <S.History>

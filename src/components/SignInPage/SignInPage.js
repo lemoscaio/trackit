@@ -6,6 +6,7 @@ import SignInForm from "./components/SignInForm.js";
 
 function SignInPage() {
     const [pageLoaded, setPageLoaded] = useState(false);
+    
     const navigate = useNavigate();
 
     useEffect(() => {

@@ -4,6 +4,7 @@ import Header from "../Header.js";
 import TodayHabits from "./components/TodayHabits.js";
 
 export function TodayPage() {
+
     return (
         <>
             <Header />

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../../../styles/styles";
 import CreateHabitContext from "./../../../contexts/CreateHabitContext";
@@ -7,8 +7,10 @@ import CreateHabit from "./CreateHabit.js";
 import Habit from "./Habit.js";
 import NoHabitMessage from "./NoHabitMessage.js";
 import TopMessage from "./TopMessage.js";
+import UserLoggedInContext from "./../../../contexts/UserLoggedInContext";
 
 function Habits() {
+    const { userLoggedIn, setUserLoggedIn } = useContext(UserLoggedInContext);
     const [habits, setHabits] = useState([]);
     const [toggleCreateTask, setToggleCreateTask] = useState(false);
     const [habitName, setHabitName] = useState("");
@@ -29,10 +31,12 @@ function Habits() {
         const promise = axios.get(GET_HABITS_URL, config);
         promise
             .then((response) => {
+                setUserLoggedIn(true);
                 const { data } = response;
                 setHabits(data);
             })
             .catch((error) => {
+                setUserLoggedIn(false)
                 alert(error);
                 navigate("../");
             });

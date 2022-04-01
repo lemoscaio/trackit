@@ -9,11 +9,13 @@ import TodayPage from "./TodayPage/TodayPage";
 import "react-loader-spinner";
 import PercentageHabitsDoneContext from "../contexts/PercentageHabitsDoneContext";
 import TodayHabitsContext from "../contexts/TodayHabitsContext";
+import UserLoggedInContext from "../contexts/UserLoggedInContext";
 import axios from "axios";
 
 function App() {
     const [percentage, setPercentage] = useState(0);
     const [todayHabits, setTodayHabits] = useState([]);
+    const [userLoggedIn, setUserLoggedIn] = useState(false);
 
     useEffect(() => {
         const GET_TODAY_HABITS_URL =
@@ -25,16 +27,18 @@ function App() {
             },
         };
 
-        const promise = axios.get(GET_TODAY_HABITS_URL, config);
-        promise
-            .then((response) => {
-                const { data } = response;
-                setTodayHabits(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+        if (userLoggedIn) {
+            const promise = axios.get(GET_TODAY_HABITS_URL, config);
+            promise
+                .then((response) => {
+                    const { data } = response;
+                    setTodayHabits(data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [userLoggedIn]);
 
     useEffect(() => {
         getPercentageDone();
@@ -52,23 +56,44 @@ function App() {
     return (
         <>
             <GlobalStyles />
-            <TodayHabitsContext.Provider
-                value={{ todayHabits, setTodayHabits }}
-            >
-                <PercentageHabitsDoneContext.Provider
-                    value={{ percentage, setPercentage }}
+            <UserLoggedInContext.Provider value={{ userLoggedIn, setUserLoggedIn }}>
+                <TodayHabitsContext.Provider
+                    value={{ todayHabits, setTodayHabits }}
                 >
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path="/" element={<SignInPage />} />;
-                            <Route path="/signup" element={<SignUpPage />} />
-                            <Route path="/habits" element={<HabitsPage />} />
-                            <Route path="/today" element={<TodayPage />} />
-                            <Route path="/history" element={<HistoryPage />} />
-                        </Routes>
-                    </BrowserRouter>
-                </PercentageHabitsDoneContext.Provider>
-            </TodayHabitsContext.Provider>
+                    <PercentageHabitsDoneContext.Provider
+                        value={{ percentage, setPercentage }}
+                    >
+                        <BrowserRouter>
+                            <Routes>
+                                <Route
+                                    path="/"
+                                    element={
+                                        <SignInPage
+                                            setUserLoggedIn={(value) =>
+                                                setUserLoggedIn(value)
+                                            }
+                                        />
+                                    }
+                                />
+                                ;
+                                <Route
+                                    path="/signup"
+                                    element={<SignUpPage />}
+                                />
+                                <Route
+                                    path="/habits"
+                                    element={<HabitsPage />}
+                                />
+                                <Route path="/today" element={<TodayPage />} />
+                                <Route
+                                    path="/history"
+                                    element={<HistoryPage />}
+                                />
+                            </Routes>
+                        </BrowserRouter>
+                    </PercentageHabitsDoneContext.Provider>
+                </TodayHabitsContext.Provider>
+            </UserLoggedInContext.Provider>
         </>
     );
 }

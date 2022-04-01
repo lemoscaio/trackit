@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import * as S from "./../../../styles/styles";
-
+import UserLoggedInContext from "./../../../contexts/UserLoggedInContext";
 
 function SignInForm({ pageLoaded, setPageLoaded }) {
+    const { userLoggedIn, setUserLoggedIn } = useContext(UserLoggedInContext);
     const [userLoginData, setUserLoginData] = useState({
         email: "",
         password: "",
@@ -46,10 +47,11 @@ function SignInForm({ pageLoaded, setPageLoaded }) {
                     isLoggedIn: true,
                 };
                 localStorage.setItem("userData", JSON.stringify(newUserData));
+                setUserLoggedIn(true);
                 navigate("../today");
             })
             .catch((error) => {
-                alert("Usuário e/ou senha inválido(s)")
+                alert("Usuário e/ou senha inválido(s)");
                 setPageLoaded(true);
             });
     }
