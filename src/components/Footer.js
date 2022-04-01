@@ -17,11 +17,11 @@ function Footer() {
                 <S.TodayButton>
                     <S.CenteredCircularProgressbar
                         value={percentage}
-                        backgroundPadding={6}
                         styles={buildStyles({
                             textColor: "#fff",
                             pathColor: "#fff",
                             trailColor: "transparent",
+                            pathTransition: "stroke-dashoffset 0.5s ease 0s",
                         })}
                     />
                     <p>Hoje</p>
