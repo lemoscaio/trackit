@@ -1,24 +1,14 @@
-import React, { useState } from "react";
-
-import SignInForm from "./components/SignInForm.js";
-import Logo from "./components/Logo.js";
-
+import React from "react";
 import * as S from "./../../styles/styles";
+import Logo from "./components/Logo.js";
+import SignInForm from "./components/SignInForm.js";
 
 function SignInPage() {
-    const [userLoginData, setUserLoginData] = useState({
-        email: "",
-        password: "",
-    });
-
     return (
         <>
             <S.LoginContainer>
                 <Logo />
-                <SignInForm
-                    setUserLoginData={setUserLoginData}
-                    userLoginData={userLoginData}
-                />
+                <SignInForm />
                 <S.StyledLink to="/signup">
                     Não tem uma conta? Cadastre-se
                 </S.StyledLink>

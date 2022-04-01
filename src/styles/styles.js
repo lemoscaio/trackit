@@ -33,6 +33,11 @@ export const Header = styled.header`
     }
 `;
 
+export const HeaderLink = styled(Link)`
+    text-decoration: none;
+    cursor: pointer;
+`;
+
 export const Container = styled.main`
     padding: 20px 30px;
     background-color: #e5e5e5;
@@ -309,7 +314,7 @@ export const Habit = styled.article`
     }
 `;
 
-export const RemoveTask = styled.div`
+export const RemoveHabit = styled.div`
     position: absolute;
     top: 0;
     right: 0;
@@ -360,7 +365,7 @@ export const TodayTopMessage = styled.div`
 `;
 
 export const CounterHabitsDone = styled.p`
-        color: #8fc549 !important;
+    color: #8fc549 !important;
 `;
 
 // HISTORY PAGE

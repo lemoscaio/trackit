@@ -44,8 +44,8 @@ function Habits() {
                 return (
                     <Habit
                         habit={habit}
-                        removeTask={(habitId) => {
-                            removeTask(habitId);
+                        removeHabit={(habitId) => {
+                            removeHabit(habitId);
                         }}
                     />
                 );
@@ -91,13 +91,13 @@ function Habits() {
             .catch((error) => {
                 console.log(error);
             });
+        // TODO move to then
         setHabits([...habits, habitData]);
     }
 
-    function removeTask(habitId) {
+    function removeHabit(habitId) {
         const DELETE_HABIT_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`;
         axios.delete(DELETE_HABIT_URL, config);
-        console.log("pssou aqui");
         const newHabits = habits.filter((habit, index) => {
             if (habit.id === habitId) {
                 return false;

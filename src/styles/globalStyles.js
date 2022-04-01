@@ -9,7 +9,6 @@ html {
 
 * {
   box-sizing: border-box;
-  cursor: auto;
 }
 
 button {

@@ -7,15 +7,22 @@ import SignInPage from "./SignInPage/SignInPage";
 import SignUpPage from "./SignUpPage/SignUpPage";
 import TodayPage from "./TodayPage/TodayPage";
 
-
-
 function App() {
+    function checkUserIsLoggedIn() {
+        
+        if (!(localStorage.getItem("userData") && localStorage.getItem("token"))) {
+            return <Route path="/" element={<SignInPage />} />;
+        } else {
+            return <Route path="/" element={<TodayPage />} />;
+        }
+    }
+
     return (
         <>
             <GlobalStyles />
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<SignInPage />} />
+                    {checkUserIsLoggedIn()}
                     <Route path="/signup" element={<SignUpPage />} />
                     <Route path="/habits" element={<HabitsPage />} />
                     <Route path="/today" element={<TodayPage />} />

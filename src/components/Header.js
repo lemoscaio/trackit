@@ -1,17 +1,19 @@
-import React from 'react'
-import * as S from "../styles/styles"
-
-
-import testImage from './../assets/images/teste.png' 
-
+import React from "react";
+import { Link } from "react-router-dom";
+import * as S from "../styles/styles";
 
 function Header() {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const { name, image } = userData;
+
     return (
         <S.Header>
-            <h1>TrackIt</h1>
-            <img src={testImage} alt={testImage}/>
+            <S.HeaderLink to="../">
+                <h1>TrackIt</h1>
+            </S.HeaderLink>
+            <img src={image} alt={`Ícone do usuário: ${name}`} />
         </S.Header>
-    )
+    );
 }
 
-export default Header
+export default Header;
