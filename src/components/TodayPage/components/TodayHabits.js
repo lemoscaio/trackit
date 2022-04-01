@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import * as S from "../../../styles/styles.js";
-import TopMessage from "./TopMessage.js";
-import TodayHabit from "./TodayHabit.js";
+import React, { useContext } from "react";
 import TodayHabitsContext from "../../../contexts/TodayHabitsContext";
+import * as S from "../../../styles/styles.js";
+import TodayHabit from "./TodayHabit.js";
+import TopMessage from "./TopMessage.js";
 
 function TodayHabits() {
     const {todayHabits, setTodayHabits} = useContext(TodayHabitsContext);

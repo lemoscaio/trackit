@@ -3,8 +3,8 @@ import * as S from "../../../styles/styles.js";
 import dayjs from "dayjs";
 import PercentageHabitsDoneContext from "../../../contexts/PercentageHabitsDoneContext";
 
-function TopMessage({ todayHabits }) {
-    const { percentage, setPercentage } = useContext(PercentageHabitsDoneContext);
+function TopMessage() {
+    const { percentage } = useContext(PercentageHabitsDoneContext);
 
     function getDayOfWeek() {
         const dayNumber = dayjs().day();
