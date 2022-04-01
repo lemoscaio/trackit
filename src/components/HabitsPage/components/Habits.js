@@ -30,7 +30,6 @@ function Habits() {
         promise
             .then((response) => {
                 const { data } = response;
-                console.log(data);
                 setHabits(data);
             })
             .catch((error) => {
@@ -91,7 +90,6 @@ function Habits() {
         promise
             .then((response) => {
                 const { data } = response;
-                console.log(data);
                 habitData.id = data.id;
                 toggleCreateTaskContainer(false);
             })

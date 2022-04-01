@@ -1,38 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import * as S from "../../../styles/styles.js";
 import TopMessage from "./TopMessage.js";
 import TodayHabit from "./TodayHabit.js";
+import TodayHabitsContext from "../../../contexts/TodayHabitsContext";
 
 function TodayHabits() {
-    const [todayHabits, setTodayHabits] = useState([]);
+    const {todayHabits, setTodayHabits} = useContext(TodayHabitsContext);
     const token = localStorage.getItem("token");
     const config = {
         headers: {
             Authorization: "Bearer " + token,
         },
     };
-
-    useEffect(() => {
-        const GET_TODAY_HABITS_URL =
-            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        };
-
-        const promise = axios.get(GET_TODAY_HABITS_URL, config);
-        promise
-            .then((response) => {
-                const { data } = response;
-                setTodayHabits(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
 
     function markAsDone(id) {
         const MARK_CHECKED_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;

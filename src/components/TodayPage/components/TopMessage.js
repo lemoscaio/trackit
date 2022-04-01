@@ -31,14 +31,7 @@ function TopMessage({ todayHabits }) {
     }
 
     function getPercentageDone() {
-        const countHabitsDone = todayHabits.filter(
-            (todayHabit) => todayHabit.done
-        ).length;
-        const countTotalHabits = todayHabits.length;
-
-        setPercentage((countHabitsDone / countTotalHabits) * 100);
-
-        return countHabitsDone > 0 ? (
+        return percentage > 0 ? (
             <S.CounterHabitsDone>
                 {percentage} % dos hábitos concluídos
             </S.CounterHabitsDone>

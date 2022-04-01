@@ -524,5 +524,5 @@ export const TodayHabitDone = styled(TodayHabit)`
 
 export const CenteredCircularProgressbar = styled(CircularProgressbar)`
   position: absolute;
-  padding: 3px;
+  padding: 5px;
 `;
