@@ -13,6 +13,7 @@ function Habits() {
     const [toggleCreateTask, setToggleCreateTask] = useState(false);
     const [habitName, setHabitName] = useState("");
     const [habitDays, setHabitDays] = useState([]);
+    const [componentLoaded, setComponentLoaded] = useState(false);
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
@@ -43,6 +44,7 @@ function Habits() {
             return habits.map((habit) => {
                 return (
                     <Habit
+                        key={habit.id}
                         habit={habit}
                         removeHabit={(habitId) => {
                             removeHabit(habitId);
@@ -71,6 +73,8 @@ function Habits() {
                     saveHabit={(habitData) => {
                         saveHabit(habitData);
                     }}
+                    componentLoaded={componentLoaded}
+                    setComponentLoaded={setComponentLoaded}
                 />
             </CreateHabitContext.Provider>
         ) : (
@@ -79,6 +83,8 @@ function Habits() {
     }
 
     function saveHabit(habitData) {
+        setComponentLoaded(false);
+
         const CREATE_HABIT_URL =
             "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
         const promise = axios.post(CREATE_HABIT_URL, habitData, config);
@@ -87,9 +93,11 @@ function Habits() {
                 const { data } = response;
                 console.log(data);
                 habitData.id = data.id;
+                toggleCreateTaskContainer(false);
             })
             .catch((error) => {
-                console.log(error);
+                alert("Algo deu errado");
+                setComponentLoaded(true);
             });
         // TODO move to then
         setHabits([...habits, habitData]);

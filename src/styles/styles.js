@@ -107,6 +107,7 @@ export const Input = styled.input`
 
 export const DefaultButton = styled.button`
     background-color: #52b6ff;
+    height: 40px;
 
     color: white;
     font-size: 16px;

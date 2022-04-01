@@ -23,8 +23,8 @@ function TopMessage({ todayHabits }) {
         }
     }
 
-    function getMonthNumber() {
-        return (dayjs().month() + 1).toString().padStart(2, "0");
+    function getMonthAndDay() {
+        return (dayjs().format("DD/MM"))
     }
 
     function getPercentageDone() {
@@ -46,7 +46,7 @@ function TopMessage({ todayHabits }) {
     return (
         <S.TodayTopMessage>
             <h2>
-                {getDayOfWeek()}, {dayjs().date()}/{getMonthNumber()}
+                {getDayOfWeek()}, {getMonthAndDay()}
             </h2>
             {getPercentageDone()}
         </S.TodayTopMessage>

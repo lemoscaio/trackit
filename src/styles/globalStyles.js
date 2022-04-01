@@ -13,6 +13,9 @@ html {
 
 button {
   font-family: 'Lexend Deca', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 `;

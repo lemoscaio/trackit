@@ -6,23 +6,15 @@ import HistoryPage from "./HistoryPage/HistoryPage";
 import SignInPage from "./SignInPage/SignInPage";
 import SignUpPage from "./SignUpPage/SignUpPage";
 import TodayPage from "./TodayPage/TodayPage";
+import "react-loader-spinner";
 
 function App() {
-    function checkUserIsLoggedIn() {
-        
-        if (!(localStorage.getItem("userData") && localStorage.getItem("token"))) {
-            return <Route path="/" element={<SignInPage />} />;
-        } else {
-            return <Route path="/" element={<TodayPage />} />;
-        }
-    }
-
     return (
         <>
             <GlobalStyles />
             <BrowserRouter>
                 <Routes>
-                    {checkUserIsLoggedIn()}
+                    <Route path="/" element={<SignInPage />} />;
                     <Route path="/signup" element={<SignUpPage />} />
                     <Route path="/habits" element={<HabitsPage />} />
                     <Route path="/today" element={<TodayPage />} />

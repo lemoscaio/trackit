@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../Footer.js";
 import Header from "../Header.js";
 import TodayHabits from "./components/TodayHabits.js";
 
-
 export function TodayPage() {
+
     return (
         <>
             <Header />

@@ -1,12 +1,11 @@
 import axios from "axios";
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-import UserDataContext from "./../../../contexts/UserDataContext";
+import { ThreeDots } from "react-loader-spinner";
 
 import * as S from "./../../../styles/styles";
 
-function SignInForm(props) {
+function SignInForm({ pageLoaded, setPageLoaded }) {
     const [userLoginData, setUserLoginData] = useState({
         email: "",
         password: "",
@@ -16,8 +15,21 @@ function SignInForm(props) {
         "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
     const navigate = useNavigate();
 
+    function fillButtonContent() {
+        return !pageLoaded ? (
+            <ThreeDots color="#fff" height={40} width={40} />
+        ) : (
+            "Entrar"
+        );
+    }
+
+    function disableWhileLoading() {
+        return !pageLoaded ? "disabled" : "";
+    }
+
     function handleSubmit(event) {
         event.preventDefault();
+        setPageLoaded(false);
 
         let promise = axios.post(SIGNIN_POST_URL, userLoginData);
         promise
@@ -37,7 +49,8 @@ function SignInForm(props) {
                 navigate("../today");
             })
             .catch((error) => {
-                console.log(error);
+                alert("Usuário e/ou senha inválido(s)")
+                setPageLoaded(true);
             });
     }
 
@@ -57,6 +70,8 @@ function SignInForm(props) {
                             email: event.target.value,
                         })
                     }
+                    required
+                    disabled={disableWhileLoading()}
                     placeholder="email"
                     autoComplete="on"
                 />
@@ -69,10 +84,12 @@ function SignInForm(props) {
                             password: event.target.value,
                         })
                     }
+                    required
+                    disabled={disableWhileLoading()}
                     placeholder="senha"
                     autoComplete="on"
                 />
-                <S.DefaultButton>Entrar</S.DefaultButton>
+                <S.DefaultButton>{fillButtonContent()}</S.DefaultButton>
             </form>
         </S.Form>
     );

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SignUpForm from "./components/SignUpForm.js";
 import Logo from "./components/Logo.js";
 
@@ -13,12 +13,31 @@ function SignUpPage() {
         image: "",
     });
 
+    const [pageLoaded, setPageLoaded] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem("userData") && localStorage.getItem("token")) {
+            navigate("/today");
+        }
+        setTimeout(() => {
+            setPageLoaded(true);
+        }, 200);
+    }, []);
+
     return (
         <>
             <S.LoginContainer>
                 <Logo />
-                <SignUpForm setUserData={setUserData} userData={userData} />
-                <S.StyledLink to="../">Já tem uma conta? Faça login!</S.StyledLink>
+                <SignUpForm
+                    setUserData={setUserData}
+                    userData={userData}
+                    pageLoaded={pageLoaded}
+                    setPageLoaded={setPageLoaded}
+                />
+                <S.StyledLink to="../">
+                    Já tem uma conta? Faça login!
+                </S.StyledLink>
             </S.LoginContainer>
         </>
     );
