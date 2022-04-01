@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as S from "../../../styles/styles.js";
 import dayjs from "dayjs";
+import PercentageHabitsDoneContext from "../../../contexts/PercentageHabitsDoneContext";
 
 function TopMessage({ todayHabits }) {
+    const { percentage, setPercentage } = useContext(PercentageHabitsDoneContext);
+
     function getDayOfWeek() {
         const dayNumber = dayjs().day();
         switch (dayNumber) {
@@ -24,7 +27,7 @@ function TopMessage({ todayHabits }) {
     }
 
     function getMonthAndDay() {
-        return (dayjs().format("DD/MM"))
+        return dayjs().format("DD/MM");
     }
 
     function getPercentageDone() {
@@ -33,10 +36,11 @@ function TopMessage({ todayHabits }) {
         ).length;
         const countTotalHabits = todayHabits.length;
 
+        setPercentage((countHabitsDone / countTotalHabits) * 100);
+
         return countHabitsDone > 0 ? (
             <S.CounterHabitsDone>
-                {((countHabitsDone / countTotalHabits) * 100).toFixed(2)} %
-                dos hábitos concluídos
+                {percentage} % dos hábitos concluídos
             </S.CounterHabitsDone>
         ) : (
             <p>Nenhum hábito concluído ainda</p>

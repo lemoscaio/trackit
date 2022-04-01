@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { CircularProgressbar } from "react-circular-progressbar";
+
 
 // HEADER
 
@@ -518,4 +520,9 @@ export const TodayHabitDone = styled(TodayHabit)`
     span {
         color: #8fc549;
     }
+`;
+
+export const CenteredCircularProgressbar = styled(CircularProgressbar)`
+  position: absolute;
+  padding: 3px;
 `;

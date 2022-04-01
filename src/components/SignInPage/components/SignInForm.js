@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
-
+import { useNavigate } from "react-router-dom";
 import * as S from "./../../../styles/styles";
+
 
 function SignInForm({ pageLoaded, setPageLoaded }) {
     const [userLoginData, setUserLoginData] = useState({

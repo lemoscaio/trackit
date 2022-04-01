@@ -1,9 +1,9 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import React from "react";
 import { ThreeDots } from "react-loader-spinner";
-
+import { useNavigate } from "react-router-dom";
 import * as S from "../../../styles/styles";
+
 
 function SignUpForm(props) {
     const {
@@ -38,7 +38,6 @@ function SignUpForm(props) {
         let promise = axios.post(SIGNUP_POST_URL, userData);
         promise
             .then((response) => {
-                const { data } = response;
                 navigate("../");
             })
             .catch((error) => {

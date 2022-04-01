@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import * as S from "../../../styles/styles";
 import CreateHabitContext from "./../../../contexts/CreateHabitContext";
-import { ThreeDots } from "react-loader-spinner";
 
 function CreateHabit({
     toggleCreateTaskContainer,
