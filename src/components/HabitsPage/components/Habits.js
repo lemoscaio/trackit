@@ -10,7 +10,7 @@ import TopMessage from "./TopMessage.js";
 import UserLoggedInContext from "./../../../contexts/UserLoggedInContext";
 
 function Habits() {
-    const { userLoggedIn, setUserLoggedIn } = useContext(UserLoggedInContext);
+    const { setUserLoggedIn } = useContext(UserLoggedInContext);
     const [habits, setHabits] = useState([]);
     const [toggleCreateTask, setToggleCreateTask] = useState(false);
     const [habitName, setHabitName] = useState("");
@@ -95,13 +95,12 @@ function Habits() {
                 const { data } = response;
                 habitData.id = data.id;
                 toggleCreateTaskContainer(false);
+                setHabits([...habits, habitData]);
             })
             .catch((error) => {
                 alert("Algo deu errado");
                 setComponentLoaded(true);
             });
-        // TODO move to then
-        setHabits([...habits, habitData]);
     }
 
     function removeHabit(habitId) {
