@@ -37,7 +37,6 @@ function Habits() {
             })
             .catch((error) => {
                 setUserLoggedIn(false);
-                alert(error);
                 navigate("../");
             });
     }, []);
