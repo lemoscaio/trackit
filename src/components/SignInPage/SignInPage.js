@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./../../styles/styles";
+import GlobalStyles from "../../styles/globalStyles";
 import Logo from "./components/Logo.js";
 import SignInForm from "./components/SignInForm.js";
 
 function SignInPage() {
     const [pageLoaded, setPageLoaded] = useState(false);
-    
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,6 +21,7 @@ function SignInPage() {
 
     return (
         <>
+            <GlobalStyles />
             <S.LoginContainer>
                 <Logo />
                 <SignInForm

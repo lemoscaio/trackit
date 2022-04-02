@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SignUpForm from "./components/SignUpForm.js";
+import GlobalStyles from "../../styles/globalStyles";
 import Logo from "./components/Logo.js";
 
 import * as S from "../../styles/styles";
@@ -27,6 +28,7 @@ function SignUpPage() {
 
     return (
         <>
+            <GlobalStyles />
             <S.LoginContainer>
                 <Logo />
                 <SignUpForm

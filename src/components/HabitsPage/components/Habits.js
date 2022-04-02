@@ -36,7 +36,7 @@ function Habits() {
                 setHabits(data);
             })
             .catch((error) => {
-                setUserLoggedIn(false)
+                setUserLoggedIn(false);
                 alert(error);
                 navigate("../");
             });

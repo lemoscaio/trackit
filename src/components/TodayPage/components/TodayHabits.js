@@ -1,18 +1,33 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
 import TodayHabitsContext from "../../../contexts/TodayHabitsContext";
+import UserLoggedInContext from "../../../contexts/UserLoggedInContext";
 import * as S from "../../../styles/styles.js";
 import TodayHabit from "./TodayHabit.js";
 import TopMessage from "./TopMessage.js";
 
 function TodayHabits() {
-    const {todayHabits, setTodayHabits} = useContext(TodayHabitsContext);
+    const { todayHabits, setTodayHabits } = useContext(TodayHabitsContext);
+    const { userLoggedIn, setUserLoggedIn } = useContext(UserLoggedInContext);
+    const navigate = useNavigate()
     const token = localStorage.getItem("token");
     const config = {
         headers: {
             Authorization: "Bearer " + token,
         },
     };
+
+    useEffect(() => {
+        if (
+            !(localStorage.getItem("userData") && localStorage.getItem("token"))
+        ) {
+            setUserLoggedIn(false);
+            navigate("../");
+        } else {
+            setUserLoggedIn(true);
+        }
+    }, []);
 
     function markAsDone(id) {
         const MARK_CHECKED_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
