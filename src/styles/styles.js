@@ -327,6 +327,8 @@ export const RemoveHabit = styled.div`
 
     margin: 13px 10px 0 0;
 
+    cursor: pointer;
+
     img {
         width: 100%;
         height: 100%;
@@ -507,8 +509,6 @@ export const TodayHabit = styled.article`
             font-size: 40px;
             color: white;
             --ionicon-stroke-width: 86px;
-
-            cursor: pointer;
         }
     }
 `;

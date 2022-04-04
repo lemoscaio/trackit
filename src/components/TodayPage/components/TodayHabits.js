@@ -29,6 +29,29 @@ function TodayHabits() {
         }
     }, []);
 
+    useEffect(() => {
+        const GET_TODAY_HABITS_URL =
+            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: {
+                Authorization: "Bearer " + token,
+            },
+        };
+
+        if (userLoggedIn) {
+            const promise = axios.get(GET_TODAY_HABITS_URL, config);
+            promise
+                .then((response) => {
+                    const { data } = response;
+                    setTodayHabits(data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [todayHabits]);
+
     function markAsDone(id) {
         const MARK_CHECKED_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
         const MARK_UNCHECKED_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`;
