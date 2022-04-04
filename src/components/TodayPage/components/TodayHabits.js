@@ -10,7 +10,7 @@ import TopMessage from "./TopMessage.js";
 function TodayHabits() {
     const { todayHabits, setTodayHabits } = useContext(TodayHabitsContext);
     const { userLoggedIn, setUserLoggedIn } = useContext(UserLoggedInContext);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const config = {
         headers: {
@@ -29,29 +29,6 @@ function TodayHabits() {
         }
     }, []);
 
-    useEffect(() => {
-        const GET_TODAY_HABITS_URL =
-            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        };
-
-        if (userLoggedIn) {
-            const promise = axios.get(GET_TODAY_HABITS_URL, config);
-            promise
-                .then((response) => {
-                    const { data } = response;
-                    setTodayHabits(data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    }, [todayHabits]);
-
     function markAsDone(id) {
         const MARK_CHECKED_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
         const MARK_UNCHECKED_URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`;
@@ -59,18 +36,36 @@ function TodayHabits() {
         const newHabits = todayHabits.map((todayHabit) => {
             if (todayHabit.id === id) {
                 if (todayHabit.done === false) {
+                    todayHabit.currentSequence === todayHabit.highestSequence
+                        ? (todayHabit.highestSequence += 1)
+                        : (todayHabit.highestSequence += 0);
+                    todayHabit.currentSequence += 1;
                     const promise = axios.post(MARK_CHECKED_URL, "", config);
                     promise
                         .then((response) => {})
                         .catch((error) => {
                             console.log(error);
+                            todayHabit.currentSequence ===
+                            todayHabit.highestSequence
+                                ? (todayHabit.highestSequence -= 1)
+                                : (todayHabit.highestSequence -= 0);
+                            todayHabit.currentSequence -= 1;
                         });
                 } else if (todayHabit.done === true) {
+                    todayHabit.currentSequence === todayHabit.highestSequence
+                        ? (todayHabit.highestSequence -= 1)
+                        : (todayHabit.highestSequence -= 0);
+                    todayHabit.currentSequence -= 1;
                     const promise = axios.post(MARK_UNCHECKED_URL, "", config);
                     promise
                         .then((response) => {})
                         .catch((error) => {
                             console.log(error);
+                            todayHabit.currentSequence ===
+                            todayHabit.highestSequence
+                                ? (todayHabit.highestSequence += 1)
+                                : (todayHabit.highestSequence += 0);
+                            todayHabit.currentSequence += 1;
                         });
                 }
                 return {

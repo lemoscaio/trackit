@@ -2,7 +2,6 @@ import React from "react";
 import * as S from "../../../styles/styles";
 import trashIcon from "./../../../assets/images/icons/trash-icon.svg";
 
-
 function Habit({ habit: { id, name, days }, removeHabit }) {
     const daysOfWeek = ["D", "S", "T", "Q", "Q", "S", "S"];
     const buttonsDaysOfWeek = daysOfWeek.map((day, index) => {
@@ -17,7 +16,13 @@ function Habit({ habit: { id, name, days }, removeHabit }) {
         <S.Habit>
             <p>{name}</p>
             <div>{buttonsDaysOfWeek}</div>
-            <S.RemoveHabit onClick={() => removeHabit(id)}>
+            <S.RemoveHabit
+                onClick={() => {
+                    if (window.confirm("Realmente deseja apagar o hábito?")) {
+                        removeHabit(id);
+                    }
+                }}
+            >
                 <img src={trashIcon} alt="Remove task Icon" />
             </S.RemoveHabit>
         </S.Habit>

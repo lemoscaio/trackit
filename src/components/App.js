@@ -56,7 +56,9 @@ function App() {
     return (
         <>
             <GlobalStyles />
-            <UserLoggedInContext.Provider value={{ userLoggedIn, setUserLoggedIn }}>
+            <UserLoggedInContext.Provider
+                value={{ userLoggedIn, setUserLoggedIn }}
+            >
                 <TodayHabitsContext.Provider
                     value={{ todayHabits, setTodayHabits }}
                 >
